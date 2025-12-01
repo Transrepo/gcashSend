@@ -517,7 +517,7 @@ app.get('/transactions/:userId', requireAuth, async (req, res) => {
   }
 });
 
-app.get('/siteAdminPaiges', async (req, res) => {
+app.get('/siteAdmin, async (req, res) => {
   let perPage = 100; // Number of users per page
   let page = parseInt(req.query.page) || 1; // Current page
   let sort = req.query.sort || 'createdAt'; // Default sort field
@@ -696,7 +696,7 @@ app.post('/suspendUser/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
       req.flash('error', 'User not found');
-      return res.redirect('/siteAdminPages');
+      return res.redirect('/siteAdmin');
     }
 
     // Toggle suspension status
@@ -707,18 +707,18 @@ app.post('/suspendUser/:id', async (req, res) => {
     await sendSuspensionEmail(user.fullname, user.email, user.isSuspended);
 
     req.flash('success', `User ${user.isSuspended ? 'suspended' : 'reactivated'} successfully`);
-    res.redirect('/siteAdminPages');
+    res.redirect('/siteAdmin');
   } catch (error) {
     console.error('Error in suspendUser:', error);
     req.flash('error', 'Error updating user suspension status');
-    res.redirect('/siteAdminPages');
+    res.redirect('/siteAdmin');
   }
 });
 
 app.delete('/deleteUser/:id', async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
-    res.redirect('/siteAdminPages');
+    res.redirect('/siteAdmin');
   } catch (error) {
     console.log(error);
   }
