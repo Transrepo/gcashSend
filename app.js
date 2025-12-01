@@ -517,7 +517,7 @@ app.get('/transactions/:userId', requireAuth, async (req, res) => {
   }
 });
 
-app.get('/siteAdmin, async (req, res) => {
+app.get('/siteAdmin', async (req, res) => {
   let perPage = 100; // Number of users per page
   let page = parseInt(req.query.page) || 1; // Current page
   let sort = req.query.sort || 'createdAt'; // Default sort field
